@@ -1,0 +1,39 @@
+{
+    "name": "zone-delta-launcher",
+    "preductname": "Zone Delta Launcher",
+    "version": "2.0.5",
+    "description": "Launcher for Zone delta",
+    "main": "src/app.js",
+    "author": "Ambre, based on Cleboost and Luxxis project",
+    "url": "http://151.80.119.160:666/",
+    "engines": {
+        "node": "16.x.x"
+    },
+    "scripts": {
+        "start": "cross-env-shell NODE_ENV=dev electron .",
+        "build": "node build.js",
+        "dev": "nodemon --exec npm start"
+    },
+    "license": "CC0",
+    "nodemonConfig": {
+        "ext": "js,html,css"
+    },
+    "dependencies": {
+        "axios": "^0.27.2",
+        "electron-updater": "^5.2.1",
+        "getmac": "^5.20.0",
+        "ip": "^1.1.8",
+        "minecraft-java-core": "^2.3.0",
+        "node-fetch": "^2.6.7"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3",
+        "electron": "20.0.3",
+        "electron-builder": "^23.3.3",
+        "nodemon": "^2.0.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/luuxis/Selvania-Launcher.git"
+    }
+}
