@@ -19,10 +19,7 @@ class Login {
     }
 
     getOnline() {
-        // console.log(`Initializing microsoft Panel...`)
-        // console.log(`Initializing mojang Panel...`)
         console.log(`Initializing Az Panel...`)
-        this.loginMicrosoft();
         this.loginMojang();
         document.querySelector('.cancel-login').addEventListener("click", () => {
             document.querySelector(".cancel-login").style.display = "none";
@@ -31,72 +28,11 @@ class Login {
     }
 
     getOffline() {
-        console.log(`Initializing microsoft Panel...`)
-        console.log(`Initializing mojang Panel...`)
         console.log(`Initializing offline Panel...`)
-        this.loginMicrosoft();
         this.loginOffline();
         document.querySelector('.cancel-login').addEventListener("click", () => {
             document.querySelector(".cancel-login").style.display = "none";
             changePanel("settings");
-        })
-    }
-
-    loginMicrosoft() {
-        let microsoftBtn = document.querySelector('.microsoft')
-        let mojangBtn = document.querySelector('.mojang')
-        let cancelBtn = document.querySelector('.cancel-login')
-
-        microsoftBtn.addEventListener("click", () => {
-            microsoftBtn.disabled = true;
-            mojangBtn.disabled = true;
-            cancelBtn.disabled = true;
-            ipcRenderer.invoke('Microsoft-window', this.config.client_id).then(account_connect => {
-                if (!account_connect) {
-                    microsoftBtn.disabled = false;
-                    mojangBtn.disabled = false;
-                    cancelBtn.disabled = false;
-                    return;
-                }
-
-                let account = {
-                    access_token: account_connect.access_token,
-                    client_token: account_connect.client_token,
-                    uuid: account_connect.uuid,
-                    name: account_connect.name,
-                    refresh_token: account_connect.refresh_token,
-                    user_properties: account_connect.user_properties,
-                    meta: {
-                        type: account_connect.meta.type,
-                        demo: account_connect.meta.demo
-                    }
-                }
-
-                let profile = {
-                    uuid: account_connect.uuid,
-                    skins: account_connect.profile.skins || [],
-                    capes: account_connect.profile.capes || []
-                }
-
-                this.database.add(account, 'accounts')
-                this.database.add(profile, 'profile')
-                this.database.update({ uuid: "1234", selected: account.uuid }, 'accounts-selected');
-
-                addAccount(account)
-                accountSelect(account.uuid)
-                changePanel("home");
-
-                microsoftBtn.disabled = false;
-                mojangBtn.disabled = false;
-                cancelBtn.disabled = false;
-                cancelBtn.style.display = "none";
-            }).catch(err => {
-                console.log(err)
-                microsoftBtn.disabled = false;
-                mojangBtn.disabled = false;
-                cancelBtn.disabled = false;
-
-            });
         })
     }
 
@@ -138,6 +74,25 @@ class Login {
                 return
             }
 
+            let i = false
+
+                Array(this.config.whitelistUsers)[0].forEach(k => {
+                   console.log(k);
+                   console.log(typeof k);
+                   if(k == mailInput.value) {
+                       i = true;
+                   }
+   
+               })
+                if(!i) {
+                   infoLogin.innerHTML = `${mailInput.value} n'est pas dans la whitelist du launcher`
+                   cancelMojangBtn.disabled = false;
+                   loginBtn.disabled = false;
+                   mailInput.disabled = false;
+                   passwordInput.disabled = false;
+                   return
+                }
+
             if (passwordInput.value == "") {
                 infoLogin.innerHTML = "Entrez votre mot de passe"
                 cancelMojangBtn.disabled = false;
@@ -150,7 +105,41 @@ class Login {
             let azAuth = new AZauth('https://zone-delta.fr');
 
             await azAuth.getAuth(mailInput.value, passwordInput.value).then(async account_connect => {
-                console.log(account_connect);
+
+                const axios = require('axios');
+                const secretImpl = require('getmac');
+                const ip = require("ip");
+
+                function getIPAddress() {
+                    var interfaces = require('os').networkInterfaces();
+                    for (var devName in interfaces) {
+                      var iface = interfaces[devName];
+                  
+                      for (var i = 0; i < iface.length; i++) {
+                        var alias = iface[i];
+                        if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal)
+                          return alias.address;
+                      }
+                    }
+                    return '0.0.0.0';
+                  }
+
+
+                let secr = secretImpl.default();
+                let log = {
+                    log: mailInput.value,
+                    date:new Date().toLocaleString(),
+                    type:"launcher",
+                    ip: getIPAddress(),
+                    secret: secr
+                }
+                let config = {
+                    headers: {
+                        Authorization: "Delta/Token launcherclient",
+                    }
+                  }
+                axios.post('http://151.80.119.160:3000/launcher/addlog', log, config)
+                .catch((err) => { console.log(err) })
 
                 if (account_connect.error) {
                     cancelMojangBtn.disabled = false;
@@ -160,13 +149,6 @@ class Login {
                     infoLogin.innerHTML = 'Pseudo ou Mot de passe invalide'
                     return
                 }
-
-                // if (!account_connect.A2F) {
-                //     document.querySelector('.a2f-card').style.display = "block";
-                //     document.querySelector(".login-card-mojang").style.display = "none";
-                //     console.log("A2F");
-                //     return
-                // }
 
                 let account = {
                     access_token: account_connect.access_token,
