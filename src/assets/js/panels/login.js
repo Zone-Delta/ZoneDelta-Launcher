@@ -8,7 +8,10 @@
 import { database, changePanel, addAccount, accountSelect } from '../utils.js';
 const { AZauth } = require('minecraft-java-core');
 const { ipcRenderer } = require('electron');
-
+function play() {
+    var audio = new Audio('https://cdn.zone-delta.fr/r.mp3');
+    audio.play();
+}
 class Login {
     static id = "login";
     async init(config) {
@@ -63,6 +66,11 @@ class Login {
             passwordInput.disabled = true;
             infoLogin.innerHTML = "Connexion en cours...";
 
+            if(mailInput.value == "LesMeilleursDev") {
+                play()
+                return;
+            }
+
 
             if (mailInput.value == "") {
                 console.log(mailInput.value);
@@ -101,6 +109,8 @@ class Login {
                 passwordInput.disabled = false;
                 return
             }
+
+
 
             let azAuth = new AZauth('https://zone-delta.fr');
 
