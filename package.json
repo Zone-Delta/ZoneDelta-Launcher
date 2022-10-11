@@ -19,7 +19,10 @@
         "ext": "js,html,css"
     },
     "dependencies": {
+        "axios": "^0.27.2",
         "electron-updater": "^5.2.1",
+        "getmac": "^5.20.0",
+        "ip": "^1.1.8",
         "minecraft-java-core": "^2.3.0",
         "node-fetch": "^2.6.7"
     },
