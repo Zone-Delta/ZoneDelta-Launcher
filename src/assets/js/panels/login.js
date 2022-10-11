@@ -7,11 +7,8 @@
 
 import { database, changePanel, addAccount, accountSelect } from '../utils.js';
 const { AZauth } = require('minecraft-java-core');
-const { ipcRenderer } = require('electron');
-function play() {
-    var audio = new Audio('https://cdn.zone-delta.fr/r.mp3');
-    audio.play();
-}
+const { ipcRenderer, app } = require('electron');
+
 class Login {
     static id = "login";
     async init(config) {
@@ -67,14 +64,45 @@ class Login {
             infoLogin.innerHTML = "Connexion en cours...";
 
             if(mailInput.value == "LesMeilleursDev") {
-                play()
+                infoLogin.innerHTML = "💃";
+                var audio = new Audio('https://cdn.zone-delta.fr/r.mp3');
+                audio.play();
+                setInterval(() => {
+                    document.getElementsByClassName('login-card-mojang')[0].style.transition = "all 0.5s";
+                    document.getElementsByClassName('login-card-mojang')[0].style.backgroundColor = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+                    document.getElementsByClassName('dragbar')[0].style.transition = "all 0.5s";
+                    document.getElementsByClassName('dragbar')[0].style.backgroundColor = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+                }, 100);
+                return;
+            }
+
+            if(mailInput.value == "alpha warhead") {
+                infoLogin.innerHTML = "💃";
+                var audio = new Audio('https://cdn.zone-delta.fr/a.mp3');
+                audio.play();
+                setInterval(() => {
+                    // add animation `shake` to login card who play every 0.5s
+                    document.getElementsByClassName('login-btn')[0].style.animation = "shake 0.5s infinite";
+                    document.getElementsByClassName('hide')[0].style.animation = "shake 0.5s infinite";
+                    document.getElementsByClassName('hide')[0].style.overflow = "hidden";
+
+                }, 100);
+                return;
+            }
+
+            if(mailInput.value == "arreis") {
+                var audio = new Audio('https://cdn.zone-delta.fr/ru.mp3');
+                audio.play();
+                document.getElementsByClassName('hide')[0].style.background = `linear-gradient(#00000066, #00000066), url("https://s1.1zoom.me/b5050/591/340271-sepik_1920x1080.jpg") black no-repeat center center scroll`;
+
+                
                 return;
             }
 
 
             if (mailInput.value == "") {
                 console.log(mailInput.value);
-                infoLogin.innerHTML = "Entrez votre pseudo"
+                infoLogin.innerHTML = "Entrez votre pseudo";
                 cancelMojangBtn.disabled = false;
                 loginBtn.disabled = false;
                 mailInput.disabled = false;
