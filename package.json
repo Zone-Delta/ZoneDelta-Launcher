@@ -24,7 +24,8 @@
         "getmac": "^5.20.0",
         "ip": "^1.1.8",
         "minecraft-java-core": "^2.3.0",
-        "node-fetch": "^2.6.7"
+        "node-fetch": "^2.6.7",
+        "username": "^6.0.0"
     },
     "devDependencies": {
         "cross-env": "^7.0.3",

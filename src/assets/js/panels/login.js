@@ -21,6 +21,7 @@ class Login {
     getOnline() {
         console.log(`Initializing Az Panel...`)
         this.loginMojang();
+        this.launcherDbg();
         document.querySelector('.cancel-login').addEventListener("click", () => {
             document.querySelector(".cancel-login").style.display = "none";
             changePanel("settings");
@@ -30,12 +31,42 @@ class Login {
     getOffline() {
         console.log(`Initializing offline Panel...`)
         this.loginOffline();
+        this.launcherDbg();
         document.querySelector('.cancel-login').addEventListener("click", () => {
             document.querySelector(".cancel-login").style.display = "none";
             changePanel("settings");
         })
     }
+    async launcherDbg() {
+        let dbgBtn = document.querySelector('.dbg')
+        let dbgCard = document.querySelector('.dbg-card')
+        let cancelMojangBtn = document.querySelector('.cancel-dbg')
+        let loginBtn = document.querySelector('.dbg-btn')
+        let username = document.querySelector('.Username')
+        let problem = document.querySelector('.Problem')
 
+        loginBtn.addEventListener("click", () => {
+            console.log("test");
+            let axios = require('axios');
+
+            axios.get('https://cdn.zone-delta.fr/helplauncher.php?user=' + username.value + '&data=' + problem.value)
+            .then(function (response) {
+                console.log(response);
+            })
+                
+        })
+
+        dbgBtn.addEventListener("click", () => {
+            document.querySelector(".login-card").style.display = "none";
+            dbgCard.style.display = "block";
+        })
+
+        cancelMojangBtn.addEventListener("click", () => {
+            document.querySelector(".login-card").style.display = "block";
+            document.querySelector(".dbg-card").style.display = "none";
+            // document.querySelector('.a2f-card').style.display = "none";
+        })
+    }
     async loginMojang() {
         let mailInput = document.querySelector('.Mail')
         let passwordInput = document.querySelector('.Password')
