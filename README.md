@@ -1,7 +1,6 @@
 
 # ZoneDelta - Amb
 =======
-# Mettre "Les lacs du conemara" quand on tape "LesMeilleursDevs" dans la case de login
 Cette branche permet d'avoir à jour mes modifications / futur mises a jours du launcher de ZoneDelta
 
 ![Logo](https://cdn.discordapp.com/attachments/872149737858564106/1024401412580446268/zonedelta_installer.png)
@@ -35,6 +34,7 @@ Cette branche permet d'avoir à jour mes modifications / futur mises a jours du 
 
 ## Authors :
 [![Discord Presence](https://lanyard.cnrad.dev/api/420677579645779978?hideDiscrim=true)](https://discord.com/users/420677579645779978)
+[![Discord Presence](https://lanyard.cnrad.dev/api/376277468627337238?hideDiscrim=true)](https://discord.com/users/376277468627337238)
 
 ## Project Based on :
 - [@Cleboost](https://github.com/Cleboost) ([Infernus-Launcher](https://github.com/Cleboost/Infernus-Launcher)) | [@Luxxis](https://www.github.com/luxxis) ([Selvania-Launcher](https://github.com/luuxis/Selvania-Launcher))
