@@ -1,8 +1,10 @@
 <div class="login-content">
     <div class="login-card">
-        <p>Connexion avec les identifiants du site !</p>
+        <p>Merci de vous connecter avec les identifiants du site.</p>
         <div class="login-type">
             <button class="mojang login-type-btn">Connexion web</button>
+            <button class="dbg login-type-btn">Mon launcher ne fonctionne pas</button>
+
             <button class="microsoft login-type-btn" style="display: none;">Microsoft</button>
         </div>
         <button class="cancel cancel-login" style="display: none;">Annuler</button>
@@ -45,6 +47,27 @@
                     <button class="cancel cancel-mojang">Annuler</button>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="dbg-card">
+    <div class="card-body">
+        <small class="info-login">&nbsp;</small>
+        <div class="login-card-mojang-input">
+            <label>Pseudo</label>
+            <input type="text" class="Username login-dbg-input" spellcheck="false">
+            <small class="error-mail">&nbsp;</small>
+        </div>
+
+        <div class="login-card-mojang-input">
+            <label>Problème en question</label>
+            <input type="text" class="Problem login-dbg-input" spellcheck="false">
+            <small class="error-password">&nbsp;</small>
+        </div>
+        <div class="btn-option-login">
+            <button class="dbg-btn">Valider</button>
+            <button class="cancel cancel-dbg">Annuler</button>
         </div>
     </div>
 </div>
