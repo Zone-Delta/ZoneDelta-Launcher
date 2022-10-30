@@ -1,0 +1,51 @@
+appId: 'wizardsstorylauncher'
+productName: 'WizardsStoryLauncher'
+artifactName: '${productName}-setup-${version}.${ext}'
+
+copyright: 'Copyright © 2019-2022 Wizards Story'
+
+asar: true
+compression: 'maximum'
+
+files:
+  - '!{dist,.gitignore,.vscode,docs,dev-app-update.yml,.nvmrc,.eslintrc.json}'
+
+extraResources:
+  - 'libraries'
+
+# Windows Configuration
+win: 
+  target: 
+    - target: 'nsis'
+      arch: 'x64'
+
+# Windows Installer Configuration
+nsis:
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+
+# macOS Configuration
+mac:
+  target:
+    - target: 'dmg'
+      arch:
+        - 'x64'
+        - 'arm64'
+  artifactName: '${productName}-setup-${version}-${arch}.${ext}'
+  category: 'public.app-category.games'
+
+# Linux Configuration
+linux: 
+  target: 'deb'
+  maintainer: 'Wizards Story'
+  vendor: 'Wizards Story'
+  synopsis: 'Modded Minecraft Launcher'
+  description: ''
+  category: 'Game'
+
+
+directories:
+  buildResources: 'build'
+  output: 'dist'

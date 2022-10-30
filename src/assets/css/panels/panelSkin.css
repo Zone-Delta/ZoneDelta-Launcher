@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+body {
+    margin: 0;
+    background: rgb(0,26,133);
+    background: linear-gradient(0deg, rgb(0, 15, 75) 0%, rgba(65,65,65,1) 100%);
+    height: 100vh;
+    font-family: 'Open Sans', sans-serif;
+    color: white
+}
+.global {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+.right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+.selector {
+    display: flex;
+    flex-wrap: wrap;
+    height: 50%;
+    width: 50%;
+}
+.skin {
+    margin: 12px;
+}
+.skinElement {
+    width: 40%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #414141;
+    margin-top: 5px;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+.file-upload {
+    width: 40%;
+    max-width: 40%;
+    min-height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #414141;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#skin-to-upload {
+    width: 70%;
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+    border: none;
+}
+#skin-to-upload input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 80%;
+    min-height: 80%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+.icon-plus {
+    font-size: 50px;
+    color: white;
+}
+.text-title {
+    font-size: 50px;
+    margin-bottom: 10%;
+}
+.btn-change {
+    background-color: #00623F;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-top: 10%;
+}
+hr {
+    width: 100%;
+    border: 10px solid white;
+    background-color: transparent;
+    border-radius: 10px;
+}
+.center {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bottom-bar-home {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    backdrop-filter: blur(5px);
+}
+
+.back-btn {
+    margin: auto 30px;
+    background-image: url("../../images/logo/back.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 15px;
+    transition: 0.25s ease-in-out;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    border-radius: 5px;
+    transition: 0.25s ease-in-out;
+}

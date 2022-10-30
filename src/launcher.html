@@ -4,6 +4,9 @@
         <link rel="stylesheet" href="assets/css/launcher.css">
     </head>
     <body class="hide">
+        <div class="content">
+            <div id="videoContainer" class="background-video" style="display:inline-block"></div>
+            <b id="output" style="vertical-align:top"></b>
         <div class="dragbar"></div>
         <div class="frame">
             <div id="minimize" class="button-frame icon-minimize"></div>
@@ -25,5 +28,104 @@
 
         <div class="panels"></div>
         <script src="assets/js/launcher.js" type="module"></script>
+        </div>
     </body>
-</html>
+    <script>
+   window.onload = function() {
+    muteonload();
+};
+    function muteonload() {
+        var muted = localStorage.getItem("muted");
+        var video=document.getElementById("myVideo")
+        var div=document.getElementById('button');
+        if (muted == "true") {
+            video.muted = true;
+            div.innerHTML = `<button class="mutebtn" id="btn" onclick="toggleMute();">Unmute <img id="muteimg" style="width: 25px;margin-left: 6px;vertical-align: middle;" src="assets/images/logo/unmute.svg"></button>`;
+        } else {
+            video.muted = false;
+            div.innerHTML = `<button class="mutebtn" id="btn" onclick="toggleMute();">Mute <img id="muteimg" style="width: 25px;margin-left: 6px;vertical-align: middle;" src="assets/images/logo/mute.svg"></button>`;
+        }
+    }
+
+    function toggleMute() {
+
+var video=document.getElementById("myVideo")
+var div=document.getElementById('button');
+
+if(video.muted){
+    video.muted = false;
+    localStorage.setItem("muted", "false");
+    div.innerHTML = `<button class="mutebtn" id="btn" onclick="toggleMute();">Mute <img id="muteimg" style="width: 25px;margin-left: 6px;vertical-align: middle;" src="assets/images/logo/mute.svg"></button>`;
+
+} else {
+    video.muted = true;
+    localStorage.setItem("muted", "true");
+    div.innerHTML = `<button class="mutebtn" id="btn" onclick="toggleMute();">Unmute <img id="muteimg" style="width: 25px;margin-left: 6px;vertical-align: middle;" src="assets/images/logo/unmute.svg"></button>`;
+}
+
+}
+        var videoContainer = document.getElementById('videoContainer'),
+    output = document.getElementById('output'),
+    nextVideo,
+    videoObjects =
+    [
+        document.createElement('video'),
+        document.createElement('video')
+    ],
+    vidSources =
+    [
+        "assets/images/video/background.mp4",
+        // "assets/images/background/videos/Final_2.mp4",
+        // "assets/images/background/videos/Final_3.mp4",
+        // "assets/images/background/videos/Final_4.mp4"
+        //this list could be additionally filled without any other changing from code
+    ],
+    //random starting point
+    nextActiveVideo = 0
+
+videoObjects[0].inx = 0; //set index
+videoObjects[1].inx = 1;
+
+initVideoElement(videoObjects[0]);
+initVideoElement(videoObjects[1]);
+
+videoObjects[0].autoplay = true;
+videoObjects[0].src = vidSources[nextActiveVideo];
+videoContainer.appendChild(videoObjects[0]);
+
+videoObjects[1].style.display = 'none';
+videoContainer.appendChild(videoObjects[1]);
+
+function initVideoElement(video)
+{
+    video.id = "myVideo";
+    video.style = 'width: 100vw;height: 100vh;object-fit: cover;position: fixed;left: 0;right: 0;top: 0;bottom: 0;z-index: -1;';
+    video.playsinline = true;
+    video.preload = 'auto'; //but do not set autoplay, because it deletes preload
+
+    //loadedmetadata is wrong because if we use it then we get endless loop
+    video.onplaying = function(e)
+    {
+
+        //select next index. If is equal vidSources.length then it is 0
+        nextActiveVideo = ++nextActiveVideo % vidSources.length;
+
+        //replace the video elements against each other:
+        if(this.inx == 0)
+            nextVideo = videoObjects[1];
+        else
+            nextVideo = videoObjects[0];
+
+        nextVideo.src = vidSources[nextActiveVideo];
+        nextVideo.pause();
+    };
+
+    video.onended = function(e)
+    {
+        this.style.display = 'none';
+        nextVideo.style.display = 'block';
+        nextVideo.play();
+    };
+}
+    </script>
+</html> 
