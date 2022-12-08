@@ -1,10 +1,10 @@
 {
     "name": "zone-delta-launcher",
     "preductname": "Zone Delta Launcher",
-    "version": "2.0.5",
+    "version": "2.1.0",
     "description": "Launcher for Zone delta",
     "main": "src/app.js",
-    "author": "Ambre, based on Cleboost and Luxxis project",
+    "author": "Ambre",
     "url": "http://151.80.119.160:666/",
     "engines": {
         "node": "16.x.x"
@@ -12,6 +12,14 @@
     "scripts": {
         "start": "cross-env-shell NODE_ENV=dev electron .",
         "build": "node build.js",
+        "build:win": "node build.js win",
+        "build:linux": "node build.js linux",
+        "build:mac": "node build.js mac",
+        "build:all": "node build.js all",
+        "dist": "electron-builder build",
+        "dist:win": "npm run dist -- -w",
+        "dist:mac": "npm run dist -- -m",
+        "dist:linux": "npm run dist -- -l",
         "dev": "nodemon --exec npm start"
     },
     "license": "CC0",
@@ -19,19 +27,19 @@
         "ext": "js,html,css"
     },
     "dependencies": {
-        "axios": "^0.27.2",
-        "electron-updater": "^5.2.1",
-        "getmac": "^5.20.0",
-        "ip": "^1.1.8",
-        "minecraft-java-core": "^2.3.0",
-        "node-fetch": "^2.6.7",
-        "xml-js": "^1.6.11"
+        "axios": "0.27.2",
+        "electron-updater": "5.2.1",
+        "getmac": "5.20.0",
+        "ip": "1.1.8",
+        "minecraft-java-core": "2.3.0",
+        "node-fetch": "2.6.7",
+        "xml-js": "1.6.11"
     },
     "devDependencies": {
-        "cross-env": "^7.0.3",
+        "cross-env": "7.0.3",
         "electron": "20.0.3",
         "electron-builder": "^23.3.3",
-        "nodemon": "^2.0.1"
+        "nodemon": "2.0.1"
     },
     "repository": {
         "type": "git",

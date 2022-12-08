@@ -1,19 +1,21 @@
-/**
- * @author Luuxis
- * @license CC-BY-NC 4.0 - https://creativecommons.org/licenses/by-nc/4.0/
- */
-
 'use strict';
 
-import { database } from '../utils.js';
-
+import { changePanel } from '../utils.js';
 
 class Skin {
     static id = "panelSkin";
-    async init(config) {
+    async init(config, news) {
         this.config = config
-        this.database = await new database().init();
+        this.news = news
+        this.initBtn();
     }
+
+initBtn() {
+    document.querySelector('.back-btn').addEventListener('click', () => {
+        changePanel('home');
+    });
+
+}
 }
 
 export default Skin;

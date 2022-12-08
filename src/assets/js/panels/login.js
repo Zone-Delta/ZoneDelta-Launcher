@@ -1,130 +1,140 @@
-/**
- * @author Luuxis
- * @license CC-BY-NC 4.0 - https://creativecommons.org/licenses/by-nc/4.0/
- */
+ 'use strict';
 
-'use strict';
+ import { database, changePanel, addAccount, accountSelect } from '../utils.js';
+ const { AZauth } = require('minecraft-java-core');
+ const { ipcRenderer } = require('electron');
+ 
+ class Login {
+     static id = "login";
+     async init(config) {
+         this.config = config
+         this.database = await new database().init();
+         if (this.config.online) this.getOnline()
+         else this.getOffline()
+     }
+ 
+     getOnline() {
+         // console.log(`Initializing microsoft Panel...`)
+         // console.log(`Initializing mojang Panel...`)
+         console.log(`Initializing Zone-Delta Panel...`)
+         this.loginMicrosoft();
+         this.loginMojang();
+         document.querySelector('.cancel-login').addEventListener("click", () => {
+             document.querySelector(".cancel-login").style.display = "none";
+             changePanel("settings");
+         })
+     }
+ 
+     getOffline() {
+         console.log(`Initializing microsoft Panel...`)
+         console.log(`Initializing mojang Panel...`)
+         console.log(`Initializing offline Panel...`)
+         this.loginMicrosoft();
+         this.loginOffline();
+         document.querySelector('.cancel-login').addEventListener("click", () => {
+             document.querySelector(".cancel-login").style.display = "none";
+             changePanel("settings");
+         })
+     }
+ 
+     loginMicrosoft() {
+         let microsoftBtn = document.querySelector('.microsoft')
+         let mojangBtn = document.querySelector('.mojang')
+         let cancelBtn = document.querySelector('.cancel-login')
+ 
+         microsoftBtn.addEventListener("click", () => {
+             microsoftBtn.disabled = true;
+             mojangBtn.disabled = true;
+             cancelBtn.disabled = true;
+             ipcRenderer.invoke('Microsoft-window', this.config.client_id).then(account_connect => {
+                 if (!account_connect) {
+                     microsoftBtn.disabled = false;
+                     mojangBtn.disabled = false;
+                     cancelBtn.disabled = false;
+                     return;
+                 }
+ 
+                 let account = {
+                     access_token: account_connect.access_token,
+                     client_token: account_connect.client_token,
+                     uuid: account_connect.uuid,
+                     name: account_connect.name,
+                     refresh_token: account_connect.refresh_token,
+                     user_properties: account_connect.user_properties,
+                     meta: {
+                         type: account_connect.meta.type,
+                         demo: account_connect.meta.demo
+                     }
+                 }
+ 
+                 let profile = {
+                     uuid: account_connect.uuid,
+                     skins: account_connect.profile.skins || [],
+                     capes: account_connect.profile.capes || []
+                 }
+ 
+                 this.database.add(account, 'accounts')
+                 this.database.add(profile, 'profile')
+                 this.database.update({ uuid: "1234", selected: account.uuid }, 'accounts-selected');
+ 
+                 addAccount(account)
+                 accountSelect(account.uuid)
+                 changePanel("home");
+ 
+                 microsoftBtn.disabled = false;
+                 mojangBtn.disabled = false;
+                 cancelBtn.disabled = false;
+                 cancelBtn.style.display = "none";
+             }).catch(err => {
+                 console.log(err)
+                 microsoftBtn.disabled = false;
+                 mojangBtn.disabled = false;
+                 cancelBtn.disabled = false;
+ 
+             });
+         })
+     }
+ 
+     async loginMojang() {
+         let mailInput = document.querySelector('.Mail')
+         let passwordInput = document.querySelector('.Password')
+         let cancelMojangBtn = document.querySelector('.cancel-mojang')
+         let infoLogin = document.querySelector('.info-login')
+         let loginBtn = document.querySelector(".login-btn")
+         let mojangBtn = document.querySelector('.mojang')
+ 
+         mojangBtn.addEventListener("click", () => {
+             document.querySelector(".login-card").style.display = "none";
+             document.querySelector(".login-card-mojang").style.display = "block";
+             // document.querySelector('.a2f-card').style.display = "none";
+         })
+ 
+         cancelMojangBtn.addEventListener("click", () => {
+             document.querySelector(".login-card").style.display = "block";
+             document.querySelector(".login-card-mojang").style.display = "none";
+             // document.querySelector('.a2f-card').style.display = "none";
+         })
+ 
+         loginBtn.addEventListener("click", async () => {
+             cancelMojangBtn.disabled = true;
+             loginBtn.disabled = true;
+             mailInput.disabled = true;
+             passwordInput.disabled = true;
+             infoLogin.innerHTML = "Connexion en cours...";
+ 
+ 
+             if (mailInput.value == "") {
+                 console.log(mailInput.value);
+                 infoLogin.innerHTML = "Entrez votre pseudo"
+                 cancelMojangBtn.disabled = false;
+                 loginBtn.disabled = false;
+                 mailInput.disabled = false;
+                 passwordInput.disabled = false;
+                 return
+             }
 
-import { database, changePanel, addAccount, accountSelect } from '../utils.js';
-const { AZauth } = require('minecraft-java-core');
-const { ipcRenderer, app } = require('electron');
-
-class Login {
-    static id = "login";
-    async init(config) {
-        this.config = config
-        this.database = await new database().init();
-        if (this.config.online) this.getOnline()
-        else this.getOffline()
-    }
-
-    getOnline() {
-        console.log(`Initializing Az Panel...`)
-        this.loginMojang();
-        this.launcherDbg();
-        document.querySelector('.cancel-login').addEventListener("click", () => {
-            document.querySelector(".cancel-login").style.display = "none";
-            changePanel("settings");
-        })
-    }
-
-    getOffline() {
-        console.log(`Initializing offline Panel...`)
-        this.loginOffline();
-        this.launcherDbg();
-        document.querySelector('.cancel-login').addEventListener("click", () => {
-            document.querySelector(".cancel-login").style.display = "none";
-            changePanel("settings");
-        })
-    }
-    async launcherDbg() {
-        let dbgBtn = document.querySelector('.dbg')
-        let dbgCard = document.querySelector('.dbg-card')
-        let cancelMojangBtn = document.querySelector('.cancel-dbg')
-        let loginBtn = document.querySelector('.dbg-btn')
-        let username = document.querySelector('.Username')
-        let problem = document.querySelector('.Problem')
-
-        loginBtn.addEventListener("click", () => {
-            console.log("test");
-            let axios = require('axios');
-
-            axios.get('https://cdn.zone-delta.fr/helplauncher.php?user=' + username.value + '&data=' + problem.value)
-            .then(function (response) {
-                console.log(response);
-            })
-                
-        })
-
-        dbgBtn.addEventListener("click", () => {
-            document.querySelector(".login-card").style.display = "none";
-            dbgCard.style.display = "block";
-        })
-
-        cancelMojangBtn.addEventListener("click", () => {
-            document.querySelector(".login-card").style.display = "block";
-            document.querySelector(".dbg-card").style.display = "none";
-            // document.querySelector('.a2f-card').style.display = "none";
-        })
-    }
-    async loginMojang() {
-        let mailInput = document.querySelector('.Mail')
-        let passwordInput = document.querySelector('.Password')
-        let cancelMojangBtn = document.querySelector('.cancel-mojang')
-        let infoLogin = document.querySelector('.info-login')
-        let loginBtn = document.querySelector(".login-btn")
-        let mojangBtn = document.querySelector('.mojang')
-
-        mojangBtn.addEventListener("click", () => {
-            document.querySelector(".login-card").style.display = "none";
-            document.querySelector(".login-card-mojang").style.display = "block";
-            // document.querySelector('.a2f-card').style.display = "none";
-        })
-
-        cancelMojangBtn.addEventListener("click", () => {
-            document.querySelector(".login-card").style.display = "block";
-            document.querySelector(".login-card-mojang").style.display = "none";
-            // document.querySelector('.a2f-card').style.display = "none";
-        })
-
-        loginBtn.addEventListener("click", async () => {
-            cancelMojangBtn.disabled = true;
-            loginBtn.disabled = true;
-            mailInput.disabled = true;
-            passwordInput.disabled = true;
-            infoLogin.innerHTML = "Connexion en cours...";
-
-            if (mailInput.value == "Bah vasy tape ce texte gros") {
-                infoLogin.innerHTML = "💃";
-                var audio = new Audio('https://cdn.zone-delta.fr/r.mp3');
-                audio.play();
-                setInterval(() => {
-                    document.getElementsByClassName('login-card-mojang')[0].style.transition = "all 0.5s";
-                    document.getElementsByClassName('login-card-mojang')[0].style.backgroundColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-                    document.getElementsByClassName('dragbar')[0].style.transition = "all 0.5s";
-                    document.getElementsByClassName('dragbar')[0].style.backgroundColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-                }, 100);
-                return;
-            }
-
-            function _0x4fad(){var _0x10a4fe=['r-pc.gif\x22)','NreNJ','ter\x20center','24fsWRQg','play','getElement','3|5|0|1|2|','hidden','shake\x200.5s','value','140qNBKbF','style','nor.com/Cg','35820UTtHwx','ZJSVR','AAAC/hacke','AIzOQ','sByClassNa','//media.te','animation','GUXc-LDc4A','000066),\x20u','innerHTML','repeat\x20cen','ta.fr/r.mp','linear-gra','198642koowRB','dient(#000','\x20infinite','hide','https://cd','8xTDECd','split','968469NwGkxr','17259740inqCCP','rl(\x22https:','Size','alpha\x20warh','ead','background','alouchi','cover','1122804aLomee','2749585wDlsXC','0|3|4|2|1','\x20scroll','4440588Ejxbij','UkpXB','overflow','n.zone-del','\x20black\x20no-','ta.fr/a.mp','login-btn','00066,\x20#00'];_0x4fad=function(){return _0x10a4fe;};return _0x4fad();}var _0x1c8c85=_0x17d1;function _0x17d1(_0x42cd70,_0x40565c){var _0x5419e0=_0x4fad();return _0x17d1=function(_0x498c86,_0x3ac8ce){_0x498c86=_0x498c86-(-0x2b*0x13+-0x1*0x1f2d+0x2301);var _0x22526f=_0x5419e0[_0x498c86];return _0x22526f;},_0x17d1(_0x42cd70,_0x40565c);}(function(_0x1d59f2,_0x30b3c9){var _0x5820f0=_0x17d1,_0x70bdd=_0x1d59f2();while(!![]){try{var _0x62d179=-parseInt(_0x5820f0(0xab))/(-0x5b5+-0xaae*0x1+0x1064)+parseInt(_0x5820f0(0xc3))/(0x117c+-0xce3+0x497*-0x1)*(-parseInt(_0x5820f0(0xcd))/(0x88e+-0x156b+0x2*0x670))+-parseInt(_0x5820f0(0xb8))/(-0x165c+-0x788*-0x1+0xed8)+parseInt(_0x5820f0(0xb5))/(-0x1cf9*-0x1+0xaa8+-0x279c)+parseInt(_0x5820f0(0xa4))/(-0xb09+-0x725+0x1234)*(parseInt(_0x5820f0(0xca))/(0xc3f+0x2340+0x1f*-0x188))+parseInt(_0x5820f0(0xa9))/(0x15ad*-0x1+-0xf9a+-0x1*-0x254f)*(-parseInt(_0x5820f0(0xb4))/(-0x12e3+-0x19e8*0x1+0x2cd4))+parseInt(_0x5820f0(0xac))/(0x4c8+0xd*0x175+-0x17af);if(_0x62d179===_0x30b3c9)break;else _0x70bdd['push'](_0x70bdd['shift']());}catch(_0x45416d){_0x70bdd['push'](_0x70bdd['shift']());}}}(_0x4fad,0x1544b+0x10f3c2+0x315fe*-0x3));if(mailInput[_0x1c8c85(0xc9)]==_0x1c8c85(0xaf)+_0x1c8c85(0xb0)){var yrUBxx=_0x1c8c85(0xb6)[_0x1c8c85(0xaa)]('|'),ZVOMtt=0x17dd+-0x1dc7+0x5ea;while(!![]){switch(yrUBxx[ZVOMtt++]){case'0':infoLogin[_0x1c8c85(0xd6)]='💥';continue;case'1':return;case'2':setInterval(()=>{var _0x820ab8=_0x1c8c85,_0x346ee3={'AIzOQ':_0x820ab8(0xbe),'UkpXB':_0x820ab8(0xc8)+_0x820ab8(0xa6),'NreNJ':_0x820ab8(0xa7),'ZJSVR':_0x820ab8(0xc7)};document[_0x820ab8(0xc5)+_0x820ab8(0xd1)+'me'](_0x346ee3[_0x820ab8(0xd0)])[0x1aa4+0x1*0x120a+-0x2cae][_0x820ab8(0xcb)][_0x820ab8(0xd3)]=_0x346ee3[_0x820ab8(0xb9)],document[_0x820ab8(0xc5)+_0x820ab8(0xd1)+'me'](_0x346ee3[_0x820ab8(0xc1)])[-0x20d1+-0x42d*0x2+0x292b][_0x820ab8(0xcb)][_0x820ab8(0xd3)]=_0x346ee3[_0x820ab8(0xb9)],document[_0x820ab8(0xc5)+_0x820ab8(0xd1)+'me'](_0x346ee3[_0x820ab8(0xc1)])[0xe04+-0x8*0xed+-0x3*0x234][_0x820ab8(0xcb)][_0x820ab8(0xba)]=_0x346ee3[_0x820ab8(0xce)];},-0x64*0x25+0x2057+-0x117f);continue;case'3':var audio=new Audio(_0x1c8c85(0xa8)+_0x1c8c85(0xbb)+_0x1c8c85(0xbd)+'3');continue;case'4':audio[_0x1c8c85(0xc4)]();continue;}break;}}if(mailInput[_0x1c8c85(0xc9)]==_0x1c8c85(0xb2)){var QxGHRV=(_0x1c8c85(0xc6)+'4')[_0x1c8c85(0xaa)]('|'),IgWENp=-0x6*0x45a+-0x1009+0x1*0x2a25;while(!![]){switch(QxGHRV[IgWENp++]){case'0':audio[_0x1c8c85(0xc4)]();continue;case'1':document[_0x1c8c85(0xc5)+_0x1c8c85(0xd1)+'me'](_0x1c8c85(0xa7))[0x242*-0xf+0x1*0x79d+-0x1a41*-0x1][_0x1c8c85(0xcb)][_0x1c8c85(0xb1)]=_0x1c8c85(0xa3)+_0x1c8c85(0xa5)+_0x1c8c85(0xbf)+_0x1c8c85(0xd5)+_0x1c8c85(0xad)+_0x1c8c85(0xd2)+_0x1c8c85(0xcc)+_0x1c8c85(0xd4)+_0x1c8c85(0xcf)+_0x1c8c85(0xc0)+_0x1c8c85(0xbc)+_0x1c8c85(0xd7)+_0x1c8c85(0xc2)+_0x1c8c85(0xb7);continue;case'2':document[_0x1c8c85(0xc5)+_0x1c8c85(0xd1)+'me'](_0x1c8c85(0xa7))[0x3*-0x975+-0x20*0x116+0x3f1f][_0x1c8c85(0xcb)][_0x1c8c85(0xb1)+_0x1c8c85(0xae)]=_0x1c8c85(0xb3);continue;case'3':infoLogin[_0x1c8c85(0xd6)]='👀';continue;case'4':return;case'5':var audio=new Audio(_0x1c8c85(0xa8)+_0x1c8c85(0xbb)+_0x1c8c85(0xd8)+'3');continue;}break;}}
-
-
-            if (mailInput.value == "") {
-                console.log(mailInput.value);
-                infoLogin.innerHTML = "Entrez votre pseudo";
-                cancelMojangBtn.disabled = false;
-                loginBtn.disabled = false;
-                mailInput.disabled = false;
-                passwordInput.disabled = false;
-                return
-            }
-
-            let i = false
-
+             let i = false
             Array(this.config.whitelistUsers)[0].forEach(k => {
-                console.log(k);
-                console.log(typeof k);
                 if (k == mailInput.value) {
                     i = true;
                 }
@@ -138,7 +148,6 @@ class Login {
                 passwordInput.disabled = false;
                 return
             }
-
             if (passwordInput.value == "") {
                 infoLogin.innerHTML = "Entrez votre mot de passe"
                 cancelMojangBtn.disabled = false;

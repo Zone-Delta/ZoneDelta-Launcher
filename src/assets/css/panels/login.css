@@ -1,15 +1,16 @@
 .login-card {
     position: absolute;
-    top: 52%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 35%;
-    background: #121212;
+    background: rgba(18, 18, 18, 0.5);
     padding: 20px;
     font: normal normal bold 19px/29px Poppins;
     color: #E1E1E1;
     border-radius: 15px;
     text-align: center;
+    backdrop-filter: blur(5px);
 }
 
 .login-type {
@@ -22,16 +23,17 @@
     border: none;
     margin: 2% 0;
     height: 2em;
-    background-color: #00bd7a;
-    box-shadow: 0 0 5px #00bd7a;
+    background: rgb(81,236,87);
+    background: radial-gradient(circle, rgba(81,236,87,1) 0%, rgba(71,189,90,1) 100%);
     color: #121212;
     font: normal normal bold 19px/29px Poppins;
     cursor: pointer;
+    transition: 0.5s ease-out;
 }
 
 .login-type-btn:hover {
-    background-color: #006e47;
-    box-shadow: 0 0 5px #006e47;
+    box-shadow: 0 0 15px #38a14a;
+    transform: scale(1.03);
 }
 
 .login-type-btn:disabled {
@@ -46,53 +48,47 @@
 }
 
 .login-card-mojang {
+    display: none;
     position: absolute;
     top: 52%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 35%;
-    background: #121212;
-    padding: 0 20px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
     font: normal normal bold 19px/29px Poppins;
     color: #E1E1E1;
     border-radius: 15px;
-    display: none;
+    text-align: center;
+    backdrop-filter: blur(5px);
 }
 
-.dbg-card {
-    position: absolute;
-    top: 52%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 35%;
-    background: #121212;
-    padding: 0 20px;
-    font: normal normal bold 19px/29px Poppins;
-    color: #E1E1E1;
-    border-radius: 15px;
-    display: none;
-}
-
-.card-body {
-    margin: 10%;
-}
 
 .login-card-mojang-input {
     text-align: center;
     display: grid;
+    padding-bottom: 10px;
+}
+
+.login-card-mojang-input2 {
+    text-align: center;
+    display: grid;
+    display: none;
 }
 
 .login-mojang-input {
     font-family: 'Poppins';
     letter-spacing: 2px;
     color: #fff;
-    border: solid 0px rgba(0, 0, 0, 0);
-    border-radius: 30px;
-    background-color: #373737;
+    border: none;
+    border-radius: 15px;
+    background-color: #1f1f1f;
     padding: 0.375rem 0.75rem;
+    margin: 0;
+    height: 2.8em;
 }
 
-.login-dbg-input {
+.login-mojang-input2 {
     font-family: 'Poppins';
     letter-spacing: 2px;
     color: #fff;
@@ -100,6 +96,7 @@
     border-radius: 30px;
     background-color: #373737;
     padding: 0.375rem 0.75rem;
+    display: none;
 }
 
 .loginDisclaimerText {
@@ -113,56 +110,85 @@
     text-align: center;
 }
 
-
-.dbg-btn {
-    border-radius: 15px;
-    border: none;
-    margin: 2% 0;
-    height: 2em;
-    background-color: #00bd7a;
-    box-shadow: 0 0 5px #00bd7a;
-    color: #121212;
-    font: normal normal bold 19px/29px Poppins;
-    cursor: pointer;
-}
-
-.dbg-btn:hover {
-    background-color: #006e47;
-    box-shadow: 0 0 5px #006e47;
-}
-
 .login-btn {
     border-radius: 15px;
     border: none;
     margin: 2% 0;
     height: 2em;
-    background-color: #00bd7a;
-    box-shadow: 0 0 5px #00bd7a;
+    background: rgb(81,236,87);
+    background: radial-gradient(circle, rgba(81,236,87,1) 0%, rgba(71,189,90,1) 100%);
     color: #121212;
     font: normal normal bold 19px/29px Poppins;
     cursor: pointer;
+    transition: 0.5s ease-out;
 }
 
 .login-btn:hover {
-    background-color: #006e47;
-    box-shadow: 0 0 5px #006e47;
+    box-shadow: 0 0 15px #38a14a;
+    transform: scale(1.03);
 }
 
 .cancel {
-    border: none;
-    background-color: #ffffff00;
+    border: 3px solid rgba(0, 0, 0, 1);
+    background-color: rgba(0, 0, 0, 0);
     color: #F1F1F1;
     font: normal normal bold 19px/29px Poppins;
+    cursor: pointer;
+    display: block;
+    border-radius: 15px;
+    width: auto;
+    margin: auto;
+    margin-top: 2%;
+    padding-top: 0;
+    transition: 0.5s ease-out;
+    height: 45px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 20px;
+    padding: 0px;
+    width: 200px;
     cursor: pointer;
 }
 
 .cancel:hover {
-    color: #373737;
+    background-color: rgb(0, 0, 0);
+}
+.cancel span{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
 }
 
+.cancel span:after{
+    color: red;
+    content: '\0078';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+    font-weight: bold;
+}
+.cancel:hover span{
+    padding-right: 25px;
+}
+.cancel:hover span:after{
+    opacity: 1;
+    right: 0;
+}
 .cancel:hover:disabled {
     color: #F1F1F1;
     cursor: default;
+}
+
+.logo {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 40%;
+    text-align: center;
 }
 
 .password-reset {
@@ -171,65 +197,14 @@
     text-decoration: none;
 }
 .password-reset:hover {
-    color: #373737;
+    color: #00bd7a;
 }
 
 .new-user {
     cursor: pointer;
-    color: rgb(118, 140, 235);
+    color: #fff;
     text-decoration: none;
 }
 .new-user:hover {
-    color: rgb(56, 69, 128);
-}
-
-/* Animation de tremblement */
-@keyframes shake {
-    0% {
-        transform: translate(1px, 1px) rotate(0deg);
-    }
-    10% {
-        transform: translate(-1px, -2px) rotate(-1deg);
-    }
-    20% {
-        transform: translate(-3px, 0px) rotate(1deg);
-    }
-    30% {
-        transform: translate(3px, 2px) rotate(0deg);
-    }
-    40% {
-        transform: translate(1px, -1px) rotate(1deg);
-    }
-    50% {
-        transform: translate(-1px, 2px) rotate(-1deg);
-    }
-    60% {
-        transform: translate(-3px, 1px) rotate(0deg);
-    }
-    70% {
-        transform: translate(3px, 1px) rotate(-1deg);
-    }
-    80% {
-        transform: translate(-1px, -1px) rotate(1deg);
-    }
-    90% {
-        transform: translate(1px, 2px) rotate(0deg);
-    }
-    100% {
-        transform: translate(1px, -2px) rotate(-1deg);
-    }
-}
-
-/* explosion animation */
-@keyframes explosion {
-    0% {
-        transform: scale(0);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.dbg-card {
-    display: none;
+    color: #00bd7a
 }

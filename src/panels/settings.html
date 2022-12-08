@@ -1,26 +1,27 @@
 <div class="settings-content">
     <div class="tabs-settings-btn">
-        <button class="tab-btn-css tab-btn active-tab-btn default-tab-btn">Comptes</button>
-        <button class="tab-btn-css tab-btn">Java</button>
+        <button class="tab-btn-css tab-btn ">Comptes</button>
+        <button class="tab-btn-css tab-btn active-tab-btn default-tab-btn">Java</button>
         <button class="tab-btn-css tab-btn">Résolution</button>
-        <button class="tab-btn-css tab-btn">Launcher</button>
+        <button class="tab-btn-css tab-btn">Skin</button>
         <button class="tab-btn-css tab-btn">Crédits</button>
         <button class="tab-btn-css save-tabs-btn">Sauvegarder</button>
     </div>
 
-    <div class="tabs-settings-content active-tab-content">
+    <div class="tabs-settings-content">
         <div class="center-align">
-            <button class="add-account">Ajouter un compte</button>
+            <div class="title-settings">Comptes</div>
             <div class="accounts"></div>
+            <button class="add-account">Ajouter un compte +</button>
         </div>
     </div>
 
-    <div class="tabs-settings-content">
+    <div class="tabs-settings-content active-tab-content">
         <div class="settings-content-scroll">
             <div class="title-settings">Paramètre de votre RAM.</div>
             <div class="java-settings">
                 <div class="information">
-                    Définition de la RAM alloué à votre jeu, une quantité plus important augmenteras les performances de votre jeu.<br> A noter qu'il faut éviter de mettre une trop grande quantité sinon cela peut provoquer des pertes de performances survos
+                    Définition de la RAM alloué à votre jeu, une quantité plus important augmenteras les performances de votre jeu.<br> A noter qu'il faut éviter de mettre une trop grande quantité sinon cela peut provoquer des pertes de performances sur vos
                     autres applications.
                     <br><br>
                     <b>- RAM Maximale :</b> Indique la quantité totale de RAM allouée à votre jeu. Il est recommandé de ne pas dépasser 50% de la quantité totale de RAM présente sur votre PC afin qu'il puisse fonctionner correctement. Si votre ordinateur
@@ -47,26 +48,17 @@
                 </div>
             </div>
 
-            <div class="title-settings">Emplacement de Java.</div>
+            <div class="title-settings">Changement de votre skin.</div>
             <div class="java-settings">
                 <div class="information">
-                    Le launcher utilise une version embarquée de Java.<br> Cette version est disponible dans le répertoire <span class="info-path"></span>.<br> Toutefois, vous pouvez spécifier votre propre exécutable.
+                    Vous pouvez changer le skin depuis le launcher en cliquant sur le bouton ci-dessous.
                 </div>
-                <input type="text" class="path" disabled />
-                <button class="path-button">Changer</button>
-                <button class="path-button-reset">Reset</button>
-                <input type="file" class="path-file" accept="application/octet-stream" />
-            </div>
-
-            <div class="title-settings">Paramètres des arguments java.</div>
-            <div class="java-settings">
-                <div class="information">
-                    Les arguments java sont utilisés pour définir les paramètres de votre jeu.
-                </div>
-                <input type="text" class="args-settings" placeholder="Il est déconseillé de modifier ce paramètre." />
-            </div>
+                    <button class="change-skin">Changer de skin</button>
+                <!-- <src img="assets/images/skin.png" style="right: 30px;"/></src> -->
+                <img src="https://minotar.net/helm/AmbreEAE/100" style="width:130px;height:130px;" class="news-author"> 
+            </div> 
         </div>
-    </div>
+    </div> 
 
     <div class="tabs-settings-content">
         <div class="center-page">
@@ -114,26 +106,27 @@
 
     <div class="tabs-settings-content">
         <div class="center-page">
-            
             <div class="title-settings">Paramètre après le lancement du jeu.</div>
-            <div class="java-settings">
-                <div class="information"></div>            
+            <div class="java-settings information">         
                 <input type="checkbox" class="checkbox-settings" id="launcher-close"><label for="launcher-close"><div class="checkround"></div></label> Fermer le launcher après le lancement du jeu.</br>
                 <input type="checkbox" class="checkbox-settings" id="launcher-close-all"><label for="launcher-close-all"><div class="checkround"></div></label> Fermer le jeu si le launcher est fermé.</br>
                 <input type="checkbox" class="checkbox-settings" id="launcher-open"><label for="launcher-open"><div class="checkround"></div></label> Garder le launcher ouvert après le lancement du jeu.
             </div>
+            <div class="title-settings">Crédits.</div>
+             <div class="java-settings information">  
+                Pour couper le son de launcher :
+            <div style="display: block;position: absolute;top: 12px;left: 272px;" id="button"><button class="mutebtn" id="btn" onclick="toggleMute();"> Mute <img id="muteimg" style="width: 25px;margin-left: 6px;vertical-align: middle;" src="assets/images/logo/mute.svg"></button></div>
+            </div>
         </div>
     </div>
-</div>
-
-
-<div class="tabs-settings-content">
-    <div class="center-page">
-        <div class="title-settings">Page de remerciment pour le projet de Zone-Delta</div>
-        <div class="java-settings">
-            <div class="information">
-                Ce launcher est le fruit de l'élaboration d'un projet de Cleboost et de Luxxis repris, réadapter par Ambre pour le projet de Zone Delta.
-            </div>
+    <div class="tabs-settings-content">
+        <div class="center-page">
+            <div class="title-settings">Page de remerciment pour le projet de Zone-Delta</div>
+            <div class="java-settings">
+                <div class="information">
+                    Ce launcher est le fruit de l'élaboration d'un projet de Cleboost et de Luxxis repris, réadapter par Ambre pour le projet de Zone Delta.
+                </div>
+                        </div>
                     </div>
                 </div>
             </div>

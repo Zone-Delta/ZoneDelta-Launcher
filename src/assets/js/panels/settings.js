@@ -1,8 +1,3 @@
-/**
- * @author Luuxis
- * @license CC-BY-NC 4.0 - https://creativecommons.org/licenses/by-nc/4.0/
- */
-
 'use strict';
 
 import { database, changePanel, accountSelect, Slider } from '../utils.js';
@@ -56,7 +51,7 @@ class Settings {
         })
 
         document.querySelector('.add-account').addEventListener('click', () => {
-            document.querySelector(".cancel-login").style.display = "contents";
+            document.querySelector(".cancel-login").style.display = "block";
             changePanel("login");
         })
     }
@@ -65,7 +60,6 @@ class Settings {
         let ramDatabase = (await this.database.get('1234', 'ram'))?.value;
         let totalMem = Math.trunc(os.totalmem() / 1073741824 * 10) / 10;
         let freeMem = Math.trunc(os.freemem() / 1073741824 * 10) / 10;
-        
 
         document.getElementById("total-ram").textContent = `${totalMem} Go`;
         document.getElementById("free-ram").textContent = `${freeMem} Go`;
@@ -73,7 +67,7 @@ class Settings {
         let sliderDiv = document.querySelector(".memory-slider");
         sliderDiv.setAttribute("max", Math.trunc((80 * totalMem) / 100));
 
-        let ram = ramDatabase ? ramDatabase : { ramMin: "1", ramMax: "4" };
+        let ram = ramDatabase ? ramDatabase : { ramMin: "1", ramMax: "2" };
         let slider = new Slider(".memory-slider", parseFloat(ram.ramMin), parseFloat(ram.ramMax));
 
         let minSpan = document.querySelector(".slider-touch-left span");
@@ -92,34 +86,34 @@ class Settings {
     async initJavaPath() {
         let javaDatabase = (await this.database.get('1234', 'java-path'))?.value?.path;
         let javaPath = javaDatabase ? javaDatabase : 'Utiliser la version de java livre avec le launcher';
-        document.querySelector(".info-path").textContent = `${dataDirectory.replace(/\\/g, "/")}/${process.platform == 'darwin' ? this.config.dataDirectory : `.${this.config.dataDirectory}`}/runtime`;
+        //document.querySelector(".info-path").textContent = `${dataDirectory.replace(/\\/g, "/")}/${process.platform == 'darwin' ? this.config.dataDirectory : `.${this.config.dataDirectory}`}/runtime`;
 
         let path = document.querySelector(".path");
-        path.value = javaPath;
+        //path.value = javaPath;
         let file = document.querySelector(".path-file");
 
-        document.querySelector(".path-button").addEventListener("click", async() => {
-            file.value = '';
-            file.click();
-            await new Promise((resolve) => {
-                let interval;
-                interval = setInterval(() => {
-                    if (file.value != '') resolve(clearInterval(interval));
-                }, 100);
-            });
+        // document.querySelector(".path-button").addEventListener("click", async() => {
+        //     file.value = '';
+        //     file.click();
+        //     await new Promise((resolve) => {
+        //         let interval;
+        //         interval = setInterval(() => {
+        //             if (file.value != '') resolve(clearInterval(interval));
+        //         }, 100);
+        //     });
 
-            if (file.value.replace(".exe", '').endsWith("java") || file.value.replace(".exe", '').endsWith("javaw")) {
-                this.database.update({ uuid: "1234", path: file.value }, 'java-path');
-                path.value = file.value.replace(/\\/g, "/");
-            } else alert("Le nom du fichier doit être java ou javaw");
+        //     if (file.value.replace(".exe", '').endsWith("java") || file.value.replace(".exe", '').endsWith("javaw")) {
+        //         this.database.update({ uuid: "1234", path: file.value }, 'java-path');
+        //         path.value = file.value.replace(/\\/g, "/");
+        //     } else alert("Le nom du fichier doit être java ou javaw");
 
-        });
+        // });
 
-        document.querySelector(".path-button-reset").addEventListener("click", () => {
-            path.value = 'Utiliser la version de java livre avec le launcher';
-            file.value = '';
-            this.database.update({ uuid: "1234", path: false }, 'java-path');
-        });
+        // document.querySelector(".path-button-reset").addEventListener("click", () => {
+        //     path.value = 'Utiliser la version de java livre avec le launcher';
+        //     file.value = '';
+        //     this.database.update({ uuid: "1234", path: false }, 'java-path');
+        // });
     }
 
     async initJavaArgs() {
@@ -128,21 +122,21 @@ class Settings {
 
         if (javaArgsDatabase?.length) argsInput.value = javaArgsDatabase.join(' ');
     
-        document.querySelector('.args-settings').addEventListener('change', () => {
-            let args = [];
-            try {
-                if (argsInput.value.length) {
-                    argsInput = argsInput.value.trim().split(/\s+/)
-                    for(let arg of argsInput) {
-                        if (arg === '') continue;
-                        if (arg === '--server' || arg === '--port') continue;
-                        args.push(arg);
-                    }
-                }
-            } finally {
-                this.database.update({ uuid: "1234", args: args }, 'java-args');
-            }
-        });
+        // document.querySelector('.args-settings').addEventListener('change', () => {
+        //     let args = [];
+        //     try {
+        //         if (argsInput.value.length) {
+        //             argsInput = argsInput.value.trim().split(/\s+/)
+        //             for(let arg of argsInput) {
+        //                 if (arg === '') continue;
+        //                 if (arg === '--server' || arg === '--port') continue;
+        //                 args.push(arg);
+        //             }
+        //         }
+        //     } finally {
+        //         this.database.update({ uuid: "1234", args: args }, 'java-args');
+        //     }
+        // });
     }
 
     async initResolution() {

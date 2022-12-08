@@ -1,3 +1,11 @@
+.logohome {
+    height: 140px;
+    width: 140px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
 .bottom-bar-home {
     position: fixed;
     bottom: 0;
@@ -5,8 +13,9 @@
     height: 70px;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
-    background: #00000080;
+    background: rgba(0, 0, 0, 0.2);
     display: flex;
+    backdrop-filter: blur(5px);
 }
 
 .player-head {
@@ -20,12 +29,13 @@
     height: 50px;
     border: none;
     border-radius: 15px;
-    transition: all 0.5s cubic-bezier(1, 0.46, 0, 1.29);
+    transition: 0.25s ease-in-out;
+    cursor: pointer;
 }
 
 .player-head:hover {
     border-radius: 5px;
-    transition: all 0.5s cubic-bezier(1, 0.46, 0, 1.29);
+    transition: 0.25s ease-in-out;
 }
 
 .settings-btn {
@@ -36,13 +46,15 @@
     height: 50px;
     border: none;
     border-radius: 15px;
-    transition: all 0.5s cubic-bezier(1, 0.46, 0, 1.29);
+    transition: ease-in-out 0.5s;
+    background-color: #00bd7b00;
+    cursor: pointer;
 }
 
 .settings-btn:hover {
     border-radius: 5px;
-    transition: all 0.5s cubic-bezier(1, 0.46, 0, 1.29);
-    cursor: pointer;
+    transition: ease-in-out 0.5s;
+    transform: rotate(180deg);
 }
 
 .icon-settings:before {
@@ -65,12 +77,19 @@
     height: 37px;
     border-radius: 20px;
     border: none;
-    background: #00bd7a;
+    background: rgb(81,236,87);
+    background: radial-gradient(circle, rgba(81,236,87,1) 0%, rgba(71,189,90,1) 100%);
     font: normal normal bold 20px/25px Poppins;
     color: #121212;
     margin: 15px 0;
-    box-shadow: 0 0 5px #00bd7a;
+    transition: 0.5s ease-out;
     cursor: pointer;
+    
+}
+
+.play-btn:hover {
+    box-shadow: 0 0 15px #38a14a;
+    transform: scale(1.05);
 }
 
 .download-content {
@@ -122,13 +141,15 @@
 
 .news-block {
     margin-bottom: 1rem;
-    transition: opacity 1s;
-    opacity: .8;
+    border-radius: 10px 10px 10px 10px;
+    background-color: #29292985;
+    transition: ease-in-out 0.25s;
+    backdrop-filter: blur(3px);
 }
 
 .news-block:hover {
-    transition: opacity 1s;
-    opacity: 1;
+    backdrop-filter: blur(10px);
+    background-color: #292929b7;
 }
 
 .opacity-1 {
@@ -141,9 +162,9 @@
     left: 0px;
     width: 100%;
     height: 87px;
-    background-color: #292929;
+
     border-radius: 10px 10px 0px 0px;
-    transition: color .2s, filter .2s;
+
 }
 
 .title {
@@ -156,7 +177,7 @@
     text-decoration: none;
     max-width: calc(100% - 158px);
     font-weight: 600;
-    font-size: 18px;
+    font-size: 25px;
     top: 50%;
     left: 30px;
     transform: translate(0, -50%);
@@ -169,7 +190,7 @@
 
 .date {
     position: absolute;
-    top: 5px;
+    top: 15px;
     right: 20px;
     color: #E1E1E1;
     width: 75px;
@@ -198,7 +219,7 @@
 .bbWrapper {
     position: relative;
     padding: 20px;
-    background-color: #1f1f1f;
+    background-color: #1f1f1f34;
     font-family: Poppins;
     font-size: 13px !important;
     color: #E1E1E1;
@@ -228,44 +249,16 @@
     position: relative;
     width: 100%;
     height: 75px;
-    background-color: #292929;
+    background-color: #29292985;
     border-radius: 10px;
-    transition: opacity 1s;
-    opacity: .8;
-}
-
-.changelog {
-    position: relative;
-    width: 100%;
-    margin-top: 10px;
-    background-color: #292929;
-    border-radius: 10px;
-    transition: opacity 1s;
-    opacity: .8;
-}
-
-.changelog:hover {
-    transition: opacity 1s;
-    opacity: 1;
-}
-
-.bbWrapperChange {
-    position: relative;
-    height: 300px;
-    padding: 20px;
-    background-color: #1f1f1f;
-    word-wrap: normal;
-    font-family: Poppins;
-    font-size: 13px !important;
-    color: #E1E1E1;
-    text-decoration: none;
-    border-radius: 0px 0px 10px 10px;
-    transition: color .2s;
+    transition: ease-in-out 0.25s;
+    backdrop-filter: blur(3px);
+    min-width: 350px;
 }
 
 .server:hover {
-    transition: opacity 1s;
-    opacity: 1;
+    backdrop-filter: blur(7px);
+    background-color: #292929af
 }
 
 .server-img {
@@ -274,6 +267,7 @@
     height: 45px;
     top: 15px;
     left: 15px;
+    border-radius: 15%;
 }
 
 .name {
@@ -300,7 +294,7 @@
 }
 
 .red {
-    color: #b62124;
+    color: #FF0409;
 }
 
 .etat-text {
@@ -309,7 +303,7 @@
     right: 14px;
     width: 49px;
     height: 33px;
-    background-color: #262626;
+    background-color: #03030383;
     border-radius: 4px;
     transition: background-color .2s;
 }
@@ -339,4 +333,163 @@
 
 .online.off {
     background-color: #FF0409;
+}
+
+.player-name {
+    font: normal normal 19px/29px Poppins;
+    color: #E1E1E1
+}
+
+.player-name:hover {
+    /* box-shadow: 0 0 15px #38a14a; */
+    transform: scale(1.05);
+    
+}
+
+.suivre{
+    display: block;
+    position: relative;
+    color: #ffffff;
+    background-color: #29292985;
+    border-radius: 10px;
+    backdrop-filter: blur(3px);
+    font: normal normal bold 25px/30px Poppins;
+    margin: 30px 0px 10px 0px;
+    min-width: 350px;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.socialLink {
+    position: relative;
+}
+
+.socialLinkBtn {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    text-align: center;
+    background-color: #1a1a1ac0;
+    border-radius: 10px;
+    width: 100%;
+    height: 50px;
+    margin: 1rem 0;
+    transition: ease-in-out 0.25s;
+}
+
+.socialLinkBtn:hover {
+    background-color: #111111e1;
+    cursor: pointer;
+}
+
+.socialLinkMedia {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    margin: 8px 1rem;
+}
+
+.socialLinkBtn span {
+    margin: 8px 0;
+}
+
+.DiscordMedia {
+    content: url(../../images/logo/social/discord.svg);
+}
+
+.TwitterMedia {
+    content: url(../../images/logo/social/twitter.svg);
+}
+
+.GithubMedia {
+    content: url(../../images/logo/social/github.png);
+}
+
+.YoutubeMedia {
+    content: url(../../images/logo/social/youtube.png);
+}
+
+.InstagramMedia {
+    content: url(../../images/logo/social/instagram.png);
+}
+
+.TwitchMedia {
+    content: url(../../images/logo/social/twitch.svg);
+}
+
+.WebsiteMedia {
+    content: url(../../images/logo/social/website.png);
+}
+
+.background-video {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+
+  .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
+  .content video {
+    width: 100%;
+    display: block;
+  }
+  .content:before {
+    content: '';
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.5) 100%), no-repeat center center scroll;
+  }
+  #mute {
+    cursor:pointer;
+    padding: 10px 20px;
+    background:#000;
+    color: #fff;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+.changelog {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+    background-color: #292929;
+    border-radius: 10px;
+    transition: opacity 1s;
+    opacity: .8;
+}
+
+.changelog:hover {
+    transition: opacity 1s;
+    opacity: 1;
+}
+
+.bbWrapperChange {
+    position: relative;
+    height: 50px;
+    padding: 10px;
+    background-color: #1f1f1f;
+    word-wrap: normal;
+    font-family: Poppins;
+    font-size: 15px !important;
+    color: #E1E1E1;
+    text-decoration: none;
+    border-radius: 0px 0px 10px 10px;
+    transition: color .2s;
 }

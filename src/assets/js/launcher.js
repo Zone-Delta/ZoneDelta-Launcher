@@ -1,8 +1,3 @@
-/**
- * @author Luuxis
- * @license CC-BY-NC 4.0 - https://creativecommons.org/licenses/by-nc/4.0/
- */
-
 'use strict';
 
 // libs 
@@ -14,7 +9,7 @@ import { config, logger, changePanel, database, addAccount, accountSelect } from
 import Login from './panels/login.js';
 import Home from './panels/home.js';
 import Settings from './panels/settings.js';
-import skin from './panels/panelSkin.js';
+import Skin from './panels/panelSkin.js';
 
 class Launcher {
     async init() {
@@ -24,14 +19,14 @@ class Launcher {
         this.config = await config.GetConfig().then(res => res);
         this.news = await config.GetNews().then(res => res);
         this.database = await new database().init();
-        this.createPanels(Login, Home, skin, Settings);
+        this.createPanels(Login, Home, Skin, Settings);
         this.getaccounts();
     }
 
     initLog() {
         document.addEventListener("keydown", (e) => {
             if (e.ctrlKey && e.shiftKey && e.keyCode == 73 || e.keyCode == 123) {
-                ipcRenderer.send("main-window-dev-tools");
+               ipcRenderer.send("main-window-dev-tools");
             }
         })
         new logger('Launcher', '#7289da')
