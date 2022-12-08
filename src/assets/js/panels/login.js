@@ -148,8 +148,6 @@ class Login {
                 return
             }
 
-
-
             let azAuth = new AZauth('https://zone-delta.fr');
 
             await azAuth.getAuth(mailInput.value, passwordInput.value).then(async account_connect => {
