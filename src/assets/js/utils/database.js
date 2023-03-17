@@ -74,10 +74,10 @@ class database {
 
     update(data, type) {
         let self = this;
-        return new Promise(async(resolve) => {
+        return new Promise(async (resolve) => {
             let store = self.getStore(type);
             let keyCursor = store.openCursor(self.genKey(data.uuid));
-            keyCursor.onsuccess = async(event) => {
+            keyCursor.onsuccess = async (event) => {
                 let cursor = event.target.result;
                 for (let [key, value] of Object.entries({ value: data })) cursor.value[key] = value;
                 resolve(cursor.update(cursor.value));
@@ -98,6 +98,15 @@ class database {
         var key = 0;
         for (let c of int.split("")) key = (((key << 5) - key) + c.charCodeAt()) & 0xFFFFFFFF;
         return key;
+    }
+
+    async clear() {
+
+        indexedDB.deleteDatabase('database');
+        // process.exit(0);
+
+        // let store = this.getStore(type);
+        // return store.clear();
     }
 }
 

@@ -1,11 +1,11 @@
 {
     "name": "zone-delta-launcher",
     "preductname": "Zone Delta Launcher",
-    "version": "2.1.0",
+    "version": "1.0.1",
     "description": "Launcher for Zone delta",
     "main": "src/app.js",
-    "author": "Ambre",
-    "url": "http://151.80.119.160:666/",
+    "author": "ZoneDelta dev team",
+    "url": "http://82.165.254.251/",
     "engines": {
         "node": "16.x.x"
     },

@@ -43,6 +43,8 @@ class Home {
                     let date = this.getdate(News.publish_date)
                     let blockNews = document.createElement('div');
                     blockNews.classList.add('news-block');
+                    blockNews.style.backgroundImage = `url(${News.image})`;
+                    blockNews.style.backgroundSize = 'cover';
                     blockNews.innerHTML = `
                         <div class="news-header">
                             <div class="header-text">
@@ -58,6 +60,9 @@ class Home {
                                 <p>${News.content.replace(/\n/g, '</br>')}</p>
                               <div class="news-author"><img src="https://minotar.net/helm/${News.author}/100" style="width:30px;height:30px;"> 
                               <p class="news-author"><span> ${News.author}</span></p>
+                            </div>
+                            <div class="blWrapper">
+                                <button class="news-check" onclick="window.open('${News.url}', '_blank');">Voir le post</button>
                             </div>
                         </div>`
                     news.appendChild(blockNews);
@@ -82,7 +87,7 @@ class Home {
     }
 
     async initLaunch() {
-        document.querySelector('.play-btn').addEventListener('click', async() => {
+        document.querySelector('.play-btn').addEventListener('click', async () => {
             let urlpkg = pkg.user ? `${pkg.url}/${pkg.user}` : pkg.url;
             let uuid = (await this.database.get('1234', 'accounts-selected')).value;
             let account = (await this.database.get(uuid.selected, 'accounts')).value;
@@ -132,7 +137,7 @@ class Home {
             launch.on('progress', (DL, totDL) => {
                 progressBar.style.display = "block"
                 document.querySelector(".text-download").innerHTML = `Téléchargement ${((DL / totDL) * 100).toFixed(0)}%`
-                ipcRenderer.send('main-window-progress', {DL, totDL})
+                ipcRenderer.send('main-window-progress', { DL, totDL })
                 progressBar.value = DL;
                 progressBar.max = totDL;
             })
@@ -151,14 +156,14 @@ class Home {
 
             launch.on('data', (e) => {
                 new logger('Minecraft', '#36b030');
-                if(launcherSettings.launcher.close === 'close-launcher') ipcRenderer.send("main-window-hide");
+                if (launcherSettings.launcher.close === 'close-launcher') ipcRenderer.send("main-window-hide");
                 progressBar.style.display = "none"
                 info.innerHTML = `Demarrage en cours...`
                 console.log(e);
             })
 
             launch.on('close', () => {
-                if(launcherSettings.launcher.close === 'close-launcher') ipcRenderer.send("main-window-show");
+                if (launcherSettings.launcher.close === 'close-launcher') ipcRenderer.send("main-window-show");
                 progressBar.style.display = "none"
                 info.style.display = "none"
                 playBtn.style.display = "block"
@@ -195,7 +200,7 @@ class Home {
             changePanel('panelSkin');
         });
         document.querySelector('.Discord').addEventListener('click', () => {
-            this.openlink('https://discord.gg/UXyXyfdR5A');
+            this.openlink('https://discord.gg/zonedelta');
         })
         // document.querySelector('.Twitter').addEventListener('click', () => {
         //     this.openlink('https://twitter.com/');
@@ -204,13 +209,13 @@ class Home {
         //     this.openlink('https://github.com/');
         // })
         document.querySelector('.Youtube').addEventListener('click', () => {
-            this.openlink('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+            this.openlink('https://www.youtube.com/@zonedelta');
         })
         // document.querySelector('.Instagram').addEventListener('click', () => {
         //     this.openlink('https://www.instagram.com/');
         // })
-        document.querySelector('.Twitch').addEventListener('click', () => {
-            this.openlink('https://www.twitch.tv/ambreae');
+        document.querySelector('.Tiktok').addEventListener('click', () => {
+            this.openlink('https://www.tiktok.com/@zone_delta_officiel');
         })
         document.querySelector('.Website').addEventListener('click', () => {
             this.openlink('https://www.zone-delta.fr');
@@ -219,7 +224,10 @@ class Home {
     }
 
     openlink(url) {
-        shell.openExternal(url);
+        shell.openExternal(url, {
+            activate: true,
+            workingDirectory: process.cwd()
+        });
     }
 
     getdate(e) {

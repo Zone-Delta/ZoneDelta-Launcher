@@ -43,9 +43,10 @@ class Splash {
         this.setStatus(`Version ${pkg.version}`);
         //if (dev) return this.startLauncher();
         config.GetConfig().then(res => {
-            if ('1.0.0' !== pkg.version) return this.shutdown(`Version ${pkg.version} obsolète,<br>veuillez télécharger la dernière version.`);
-           // this.shutdown(`Votre version de ZoneDelta est obsolète,<br>veuillez télécharger la dernière version sur <a href="https://discord.gg/zonedelta">Discord</a>.`);
-           ipcRenderer.send('update-window-close')
+            // if ('1.0.0' !== pkg.version) return this.shutdown(`Version ${pkg.version} obsolète,<br>veuillez télécharger la dernière version.`);
+            // this.shutdown(`Votre version de ZoneDelta est obsolète,<br>veuillez télécharger la dernière version sur <a href="https://discord.gg/zonedelta">Discord</a>.`);
+            //    ipcRenderer.send('update-window-close')
+            this.startLauncher()
         }).catch(e => {
             console.error(e);
             return this.shutdown("Aucune connexion internet détectée,<br>veuillez réessayer ultérieurement.");

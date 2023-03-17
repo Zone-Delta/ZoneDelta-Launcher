@@ -50,4 +50,7 @@ function headplayer(pseudo) {
 
 function player(pseudo) {
     document.querySelector(".player-name").innerText = pseudo;
+    document.querySelector(".player-name").onclick = function () {
+        window.open(`https://zone-delta.fr/api/user-api/${pseudo}`, '_blank');
+    };
 }

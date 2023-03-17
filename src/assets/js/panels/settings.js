@@ -2,6 +2,7 @@
 
 import { database, changePanel, accountSelect, Slider } from '../utils.js';
 const dataDirectory = process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Application Support' : process.env.HOME)
+const { ipcRenderer } = require('electron');
 
 const os = require('os');
 
@@ -18,6 +19,15 @@ class Settings {
         this.initJavaArgs();
         this.initResolution();
         this.initLauncherSettings();
+        this.initClearState();
+    }
+
+    initClearState() {
+        document.querySelector(".clear-data-launcher").addEventListener("click", () => {
+            this.database.clear();
+            // ipcRenderer.send("main-window-close");
+            changePanel("login");
+        })
     }
 
     initAccount() {

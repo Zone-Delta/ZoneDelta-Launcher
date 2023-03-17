@@ -3,7 +3,7 @@
         <button class="tab-btn-css tab-btn ">Comptes</button>
         <button class="tab-btn-css tab-btn active-tab-btn default-tab-btn">Java</button>
         <button class="tab-btn-css tab-btn">Résolution</button>
-        <button class="tab-btn-css tab-btn">Skin</button>
+        <button class="tab-btn-css tab-btn">Launcher</button>
         <button class="tab-btn-css tab-btn">Crédits</button>
         <button class="tab-btn-css save-tabs-btn">Sauvegarder</button>
     </div>
@@ -21,12 +21,18 @@
             <div class="title-settings">Paramètre de votre RAM.</div>
             <div class="java-settings">
                 <div class="information">
-                    Définition de la RAM alloué à votre jeu, une quantité plus important augmenteras les performances de votre jeu.<br> A noter qu'il faut éviter de mettre une trop grande quantité sinon cela peut provoquer des pertes de performances sur vos
+                    Définition de la RAM alloué à votre jeu, une quantité plus important augmenteras les performances de
+                    votre jeu.<br> A noter qu'il faut éviter de mettre une trop grande quantité sinon cela peut
+                    provoquer des pertes de performances sur vos
                     autres applications.
                     <br><br>
-                    <b>- RAM Maximale :</b> Indique la quantité totale de RAM allouée à votre jeu. Il est recommandé de ne pas dépasser 50% de la quantité totale de RAM présente sur votre PC afin qu'il puisse fonctionner correctement. Si votre ordinateur
-                    a plus de 8Go de RAM, nous vous recommandons d'allouer 3Go. Si votre ordinateur a 4Go ou moins, n'allouez pas plus de 2Go.<br><br>
-                    <b>- RAM Minimale :</b> Indique la quantité minimale de RAM allouée au démarrage de votre jeu. Il est recommandé de ne pas mettre plus de 3Go pour cette valeur. La valeur typique est de 1Go.
+                    <b>- RAM Maximale :</b> Indique la quantité totale de RAM allouée à votre jeu. Il est recommandé de
+                    ne pas dépasser 50% de la quantité totale de RAM présente sur votre PC afin qu'il puisse fonctionner
+                    correctement. Si votre ordinateur
+                    a plus de 8Go de RAM, nous vous recommandons d'allouer 3Go. Si votre ordinateur a 4Go ou moins,
+                    n'allouez pas plus de 2Go.<br><br>
+                    <b>- RAM Minimale :</b> Indique la quantité minimale de RAM allouée au démarrage de votre jeu. Il
+                    est recommandé de ne pas mettre plus de 3Go pour cette valeur. La valeur typique est de 1Go.
                 </div>
                 <div class="ram-info">
                     <div class="memory-slider" min="0.5" max="8" step="0.5">
@@ -48,24 +54,24 @@
                 </div>
             </div>
 
-            <div class="title-settings">Changement de votre skin.</div>
+            <!-- <div class="title-settings">Changement de votre skin.</div>
             <div class="java-settings">
                 <div class="information">
                     Vous pouvez changer le skin depuis le launcher en cliquant sur le bouton ci-dessous.
                 </div>
                     <button class="change-skin">Changer de skin</button>
-                <!-- <src img="assets/images/skin.png" style="right: 30px;"/></src> -->
                 <img src="https://minotar.net/helm/AmbreEAE/100" style="width:130px;height:130px;" class="news-author"> 
-            </div> 
+            </div>  -->
         </div>
-    </div> 
+    </div>
 
     <div class="tabs-settings-content">
         <div class="center-page">
             <div class="title-settings">Paramètre de la résolution de minecraft.</div>
             <div class="java-settings">
                 <div class="information">
-                    Définissez une résolution personnalisée ou choisissez-en une dans la liste en fonction de la taille de votre écran.
+                    Définissez une résolution personnalisée ou choisissez-en une dans la liste en fonction de la taille
+                    de votre écran.
                 </div>
                 <div class="input-size-content">
                     <div class="input-size">
@@ -74,7 +80,8 @@
                         <input type="text" class="height-size input-settings" disabled>
                         <div class="select-wrap icon-monitor">
                             <select id="select" class="select">
-                                <option disabled selected value style="display: none">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                                <option disabled selected value style="display: none">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                 <optgroup label="Ratio 4:3">
                                     <option value="640 x 480">640 x 480</option>
                                     <option value="800 x 600">800 x 600</option>
@@ -107,15 +114,21 @@
     <div class="tabs-settings-content">
         <div class="center-page">
             <div class="title-settings">Paramètre après le lancement du jeu.</div>
-            <div class="java-settings information">         
-                <input type="checkbox" class="checkbox-settings" id="launcher-close"><label for="launcher-close"><div class="checkround"></div></label> Fermer le launcher après le lancement du jeu.</br>
-                <input type="checkbox" class="checkbox-settings" id="launcher-close-all"><label for="launcher-close-all"><div class="checkround"></div></label> Fermer le jeu si le launcher est fermé.</br>
-                <input type="checkbox" class="checkbox-settings" id="launcher-open"><label for="launcher-open"><div class="checkround"></div></label> Garder le launcher ouvert après le lancement du jeu.
+            <div class="java-settings information">
+                <input type="checkbox" class="checkbox-settings" id="launcher-close"><label for="launcher-close">
+                    <div class="checkround"></div>
+                </label> Fermer le launcher après le lancement du jeu.</br>
+                <input type="checkbox" class="checkbox-settings" id="launcher-close-all"><label
+                    for="launcher-close-all">
+                    <div class="checkround"></div>
+                </label> Fermer le jeu si le launcher est fermé.</br>
+                <input type="checkbox" class="checkbox-settings" id="launcher-open"><label for="launcher-open">
+                    <div class="checkround"></div>
+                </label> Garder le launcher ouvert après le lancement du jeu.
             </div>
-            <div class="title-settings">Crédits.</div>
-             <div class="java-settings information">  
-                Pour couper le son de launcher :
-            <div style="display: block;position: absolute;top: 12px;left: 272px;" id="button"><button class="mutebtn" id="btn" onclick="toggleMute();"> Mute <img id="muteimg" style="width: 25px;margin-left: 6px;vertical-align: middle;" src="assets/images/logo/mute.svg"></button></div>
+            <div class="title-settings">Gestion des données.</div>
+            <div class="java-settings information">
+                <button class="tab-btn-css-2 clear-data-launcher">Vider les données du launcher.</br></button>
             </div>
         </div>
     </div>
@@ -124,12 +137,13 @@
             <div class="title-settings">Page de remerciment pour le projet de Zone-Delta</div>
             <div class="java-settings">
                 <div class="information">
-                    Ce launcher est le fruit de l'élaboration d'un projet de Cleboost et de Luxxis repris, réadapter par Ambre pour le projet de Zone Delta.
-                </div>
-                        </div>
-                    </div>
+                    Ce launcher est le fruit de l'élaboration d'un projet de Cleboost et de Luxxis repris, réadapté par
+                    Ambre & Gabidut76 pour le projet de Zone Delta. 
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
+</div>
 </div>

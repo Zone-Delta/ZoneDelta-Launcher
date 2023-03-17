@@ -2,10 +2,12 @@
     height: 140px;
     width: 140px;
     display: block;
+    margin-bottom: 10px;
     margin-left: auto;
     margin-right: auto;
-    
+
 }
+
 .bottom-bar-home {
     position: fixed;
     bottom: 0;
@@ -77,18 +79,18 @@
     height: 37px;
     border-radius: 20px;
     border: none;
-    background: rgb(81,236,87);
-    background: radial-gradient(circle, rgba(81,236,87,1) 0%, rgba(71,189,90,1) 100%);
+    background: rgb(73, 128, 223);
+    background: radial-gradient(circle, rgb(73, 128, 223) 0%, rgb(73, 128, 223) 100%);
     font: normal normal bold 20px/25px Poppins;
     color: #121212;
     margin: 15px 0;
     transition: 0.5s ease-out;
     cursor: pointer;
-    
+
 }
 
 .play-btn:hover {
-    box-shadow: 0 0 15px #38a14a;
+    box-shadow: 0 0 15px rgb(73, 128, 223);
     transform: scale(1.05);
 }
 
@@ -341,12 +343,12 @@
 }
 
 .player-name:hover {
-    /* box-shadow: 0 0 15px #38a14a; */
+    /* box-shadow: 0 0 15px rgb(73, 128, 223); */
     transform: scale(1.05);
-    
+
 }
 
-.suivre{
+.suivre {
     display: block;
     position: relative;
     color: #ffffff;
@@ -420,6 +422,10 @@
     content: url(../../images/logo/social/twitch.svg);
 }
 
+.tiktokMedia {
+    content: url(../../images/logo/social/tiktok.svg);
+}
+
 .WebsiteMedia {
     content: url(../../images/logo/social/website.png);
 }
@@ -434,19 +440,41 @@
     top: 0;
     bottom: 0;
     z-index: -1;
-  }
+}
 
-  .content {
+.content {
     position: relative;
     width: 100%;
     height: 100%;
     margin: 0 auto;
-  }
-  .content video {
+}
+
+button.news-check {
+    position: absolute;
+    bottom: 5%;
+    background: transparent;
+    border: 1px solid rgba(73, 128, 223, 0.400);
+    box-shadow: 0 0 25px rgb(73, 128, 223);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition-duration: 200ms;
+    z-index: 1;
+}
+
+button.news-check:hover {
+    background: rgb(73, 128, 223);
+    border: 1px solid rgb(73, 128, 223);
+    box-shadow: 0 0 15px rgb(73, 128, 223);
+}
+
+.content video {
     width: 100%;
     display: block;
-  }
-  .content:before {
+}
+
+.content:before {
     content: '';
     position: absolute;
     background: rgba(0, 0, 0, 0.5);
@@ -455,15 +483,16 @@
     bottom: 0;
     left: 0;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.5) 100%), no-repeat center center scroll;
-  }
-  #mute {
-    cursor:pointer;
+}
+
+#mute {
+    cursor: pointer;
     padding: 10px 20px;
-    background:#000;
+    background: #000;
     color: #fff;
     border-radius: 4px;
     display: inline-block;
-  }
+}
 
 .changelog {
     position: relative;

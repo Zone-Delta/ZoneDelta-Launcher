@@ -23,8 +23,8 @@
     border: none;
     margin: 2% 0;
     height: 2em;
-    background: rgb(81,236,87);
-    background: radial-gradient(circle, rgba(81,236,87,1) 0%, rgba(71,189,90,1) 100%);
+    background: rgb(73, 128, 223);
+    background: radial-gradient(circle, rgb(73, 128, 223) 0%, rgb(73, 128, 223) 100%);
     color: #121212;
     font: normal normal bold 19px/29px Poppins;
     cursor: pointer;
@@ -32,7 +32,7 @@
 }
 
 .login-type-btn:hover {
-    box-shadow: 0 0 15px #38a14a;
+    box-shadow: 0 0 15px rgb(73, 128, 223);
     transform: scale(1.03);
 }
 
@@ -115,8 +115,8 @@
     border: none;
     margin: 2% 0;
     height: 2em;
-    background: rgb(81,236,87);
-    background: radial-gradient(circle, rgba(81,236,87,1) 0%, rgba(71,189,90,1) 100%);
+    background: rgb(73, 128, 223);
+    background: radial-gradient(circle, rgb(73, 128, 223) 0%, rgb(73, 128, 223) 100%);
     color: #121212;
     font: normal normal bold 19px/29px Poppins;
     cursor: pointer;
@@ -124,7 +124,7 @@
 }
 
 .login-btn:hover {
-    box-shadow: 0 0 15px #38a14a;
+    box-shadow: 0 0 15px rgb(73, 128, 223);
     transform: scale(1.03);
 }
 

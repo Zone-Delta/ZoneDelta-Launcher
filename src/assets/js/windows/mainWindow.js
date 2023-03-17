@@ -12,6 +12,7 @@ function getWindow() {
 function destroyWindow() {
     if (!updateWindow) return;
     updateWindow.close();
+    // updateWindow.quit();
     updateWindow = undefined;
 }
 
