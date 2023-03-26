@@ -1,7 +1,7 @@
 {
     "name": "zone-delta-launcher",
     "preductname": "Zone Delta Launcher",
-    "version": "2.0.6",
+    "version": "1.0.1",
     "description": "Launcher for Zone delta",
     "main": "src/app.js",
     "author": "ZoneDelta dev team",
